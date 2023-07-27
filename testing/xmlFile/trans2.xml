@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="2"> 
+    <order sym="yes" amount="10" limit="10"/> 
+    <query id="1"/>    <!-- open shares=10 -->
+    <cancel id="1"/>   <!-- canceled shares=10 -->
+    <query id="1"/>    <!-- canceled shares=10 -->
+</transactions>
+
+<!-- test transition order-->
+<!-- 2. test order/query/cancel: buy & cancel stock -->

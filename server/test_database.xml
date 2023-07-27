@@ -1,0 +1,220 @@
+<!-- test create -->
+<!-- 1. test account error -->
+<?xml version="1.0" encoding="UTF-8"?>
+<create>
+    <account id="1" balance="100.5"/>
+    <account id="2" balance="1050.5"/>
+    <!-- error already exist -->
+    <account id="2" balance="200.5"/>
+    <!-- negative balance -->
+    <account id="3" balance="-250.5"/>
+</create>
+
+<!-- 2. test account/symbol error -->
+<?xml version="1.0" encoding="UTF-8"?>
+<create>
+    <symbol sym="yes">
+      <account id="1">20</account>
+      <account id="2">40</account>
+    </symbol>
+    <!-- account didn't exist -->
+    <symbol sym="no">
+      <account id="3">50</account>
+    </symbol>
+    <symbol sym="yes">
+      <account id="1">30</account>
+    </symbol>
+</create>
+
+
+<!-- test transition order-->
+<!-- 1. test order: error account not exist -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="3"> 
+    <order sym="yes" amount="10" limit="10"/>
+    <query id="1"/>
+    <cancel id="1"/>
+</transactions>
+
+<!-- 2. test order: buy & cancel stock -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="2"> 
+    <order sym="yes" amount="10" limit="10"/> 
+    <query id="1"/>    <!-- open shares=10 -->
+    <cancel id="1"/>   <!-- canceled shares=10 -->
+    <query id="1"/>    <!-- canceled shares=10 -->
+</transactions>
+
+<!-- 3. test order: sell stock -->
+<!-- account 1 yes:10 limit:10 balance:100.5 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-40" limit="10"/>
+    <query id="2"/>   <!-- open shares=-40 -->
+</transactions>
+
+<!-- 4. test order: buy stock -->
+<!-- account 1 yes:10  balance:400.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="2"> <!-- buy stock, account 2 symbol yes amount 70-->
+    <order sym="yes" amount="30" limit="20"/>
+    <query id="3"/>   <!-- executed shares=30 -->
+    <query id="2"/>     <!-- open shares=-10 -->
+                        <!-- executed shares=-30 -->
+</transactions>
+
+<!-- 5. test order: sell stock error-->
+<!-- account 1 yes:10  balance:400.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 1 symbol yes amount 10, balance 400.5-->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> <!-- error sell stock is not enough-->
+    <order sym="yes" amount="-15" limit="10"/>
+    <!-- order not exist -->
+    <query id="4"/> 
+</transactions>
+
+<!-- buy stock-->
+<!-- account 1 yes:10  balance:0.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="50" limit="8"/>
+    <!-- open order buy amount 50, limit 8, symbol "yes"-->
+    <query id="4"/> 
+</transactions>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="1" limit="10"/><!-- error balance isn't enough-->
+    <!-- error transaction is not exist-->
+    <query id="5"/> 
+</transactions>
+
+<!-- buy stock-->
+<!-- account 1 yes:0  balance:0.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 5 amount:-10 limit:10 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-10" limit="10"/>
+    <query id="5"/> 
+</transactions>
+
+
+<!-- account 1 yes:0  balance:0.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 5 amount:-10 limit:10 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 3 yes:70 limit:2 balance:1000.5-->
+<create>
+    <account id="3" balance="2000.5"/>
+</create>
+
+
+<!-- trans 6 amount:80 limit:20 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 2 amount:-30 limit:20 executed:10-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- trans 2 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 5 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- account 1 yes:0  balance:200.5 -->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 3 yes:70 limit:2 balance:200.5-->
+<!-- buy 100 yes limit 10 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="3"> 
+    <order sym="yes" amount="100" limit="20"/>
+    <query id="6"/> 
+</transactions>
+
+<!-- error symbol not enough -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-10" limit="20"/>
+    <query id="7"/> 
+</transactions>
+
+<!-- error symbol not enough -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="no" amount="-10" limit="20"/>
+    <query id="7"/> 
+</transactions>
+
+<!-- trans 6 amount:80 limit:20 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 2 amount:-30 limit:20 executed:10-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- trans 2 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 5 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- account 1 yes:150  balance:200.5 -->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 3 yes:70 limit:2 balance:200.5-->
+<!-- buy 100 yes limit 10 -->
+<create>
+    <symbol sym="yes">
+      <account id="1">150</account>
+    </symbol>
+</create>
+<!-- trans 6 amount:70 limit:20 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 2 amount:-30 limit:20 executed:10-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- trans 2 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 5 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：20-->
+<!-- trans 7 amount:-10 limit:1 executed：20-->
+<!-- account 1 yes:140  balance:220.5 -->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 3 yes:70 limit:2 balance:200.5-->
+<!-- sell 10 yes limit 1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-10" limit="1"/>
+    <query id="7"/> 
+</transactions>
+
+<!-- trans 8 amount:-20 limit:1 open-->
+<!-- trans 2 amount:-30 limit:20 executed:10-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- trans 2 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 5 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：20-->
+<!-- trans 7 amount:-10 limit:1 executed：20-->
+<!-- trans 6 amount:70 limit:20 executed：20-->
+<!-- trans 8 amount:-70 limit:1 executed：20-->
+<!-- trans 4 amount:50 limit:8 executed：8-->
+<!-- trans 8 amount:-50 limit:1 executed：8-->
+<!-- account 1 yes:0  balance:2200.5 -->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 3 yes:70 limit:2 balance:200.5-->
+<!-- sell 140 yes limit 1 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-140" limit="1"/>
+    <query id="8"/> 
+</transactions>
+
+

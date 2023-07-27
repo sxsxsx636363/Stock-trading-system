@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-40" limit="10"/>
+    <query id="2"/>   <!-- open shares=-40 -->
+</transactions>
+
+<!-- 3. test order: sell stock -->
+<!-- account 1 yes:10 limit:10 balance:100.5 -->

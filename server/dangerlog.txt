@@ -1,0 +1,13 @@
+1. When compile getAccount(),error: terminate called after throwing an instance of 'pqxx::usage_error' what():  Started transaction<READ COMMITTED> while transaction<READ COMMITTED> still active.
+This is because a database transaction is already in progress but we are trying to start another transaction while the previous transaction is still active.
+By delete a useless transaction in the function, this problem solved.
+
+2. Use “FOR UPDATE” in “SELECT” query to add row-level write lock avoid read-modify-write-cycle in database， which will get the updated version of the row that is locked and returned to the client.
+This is implemented in getAccountBalance(), getPosition(),getOpenOrder() functions, which will be used for later update.
+
+3. This database didn't provide SERIALIZABLE isolation, which SERIALIZABLE performance will be less efficient, since it will abort with a serialization error when commit the second transaction.
+And need to re-run the failed transaction from the beginning. Therefore, this project use Row level locking for concurrency control.
+
+4. getAccountBalance() function is moved inside the UpdateAccountBalance() to avoid deadlock, since it has row-level write lock relative to "SELECT ... FOR UPDATE"
+
+Please read README.txt

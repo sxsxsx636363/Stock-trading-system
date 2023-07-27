@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="2"> <!-- buy stock, account 2 symbol yes amount 70-->
+    <order sym="yes" amount="30" limit="20"/>
+    <query id="3"/>   <!-- executed shares=30 -->
+    <query id="2"/>     <!-- open shares=-10 -->
+                        <!-- executed shares=-30 -->
+</transactions>
+
+<!-- 4. test order: buy stock -->
+<!-- account 1 yes:10  balance:400.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->

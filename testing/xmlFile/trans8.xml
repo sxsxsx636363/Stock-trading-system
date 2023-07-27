@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-10" limit="20"/>
+    <query id="7"/> 
+    <order sym="no" amount="-10" limit="20"/>
+    <query id="7"/> 
+</transactions>

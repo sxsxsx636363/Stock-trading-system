@@ -1,0 +1,8 @@
+178 
+<?xml version="1.0" encoding="UTF-8"?>
+<create>
+    <account id="1000" balance="100.5"/>
+    <symbol sym="zhumi">
+        <account id="1000">10</account>
+    </symbol>
+</create>

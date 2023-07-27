@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="-10" limit="1"/>
+    <query id="7"/>
+    <order sym="yes" amount="-140" limit="1"/>
+    <query id="8"/>  
+</transactions>
+
+<!-- trans 8 amount:-20 limit:1 open-->
+<!-- trans 2 amount:-30 limit:20 executed:10-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- trans 2 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 5 amount:-10 limit:10 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：10-->
+<!-- trans 6 amount:10 limit:20 executed：20-->
+<!-- trans 7 amount:-10 limit:1 executed：20-->
+<!-- trans 6 amount:70 limit:20 executed：20-->
+<!-- trans 8 amount:-70 limit:1 executed：20-->
+<!-- trans 4 amount:50 limit:8 executed：8-->
+<!-- trans 8 amount:-50 limit:1 executed：8-->
+<!-- account 1 yes:0  balance:2200.5 -->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+<!-- account 3 yes:70 limit:2 balance:200.5-->
+<!-- sell 140 yes limit 1 -->

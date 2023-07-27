@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<create>
+    <symbol sym="yes">
+      <account id="1">20</account>
+      <account id="2">40</account>
+    </symbol>
+    <!-- account didn't exist -->
+    <symbol sym="no">
+      <account id="3">50</account>
+    </symbol>
+    <symbol sym="yes">
+      <account id="1">30</account>
+    </symbol>
+</create>
+
+<!-- test create -->
+<!-- 2. test account/symbol error -->

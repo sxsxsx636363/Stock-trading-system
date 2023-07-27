@@ -1,0 +1,6 @@
+135 
+<transactions id="1000">
+    <order sym="zhumi" amount="10" limit="1"/>
+    <query id="1000"/>
+    <cancel id="1000"/>
+</transactions>

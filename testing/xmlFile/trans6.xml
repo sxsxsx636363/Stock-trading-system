@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transactions id="1"> 
+    <order sym="yes" amount="50" limit="8"/>
+    <!-- open order buy amount 50, limit 8, symbol "yes"-->
+    <query id="4"/> 
+    <order sym="yes" amount="1" limit="10"/><!-- error balance isn't enough-->
+    <!-- error transaction is not exist-->
+    <query id="5"/>
+    <order sym="yes" amount="-10" limit="10"/>
+    <query id="5"/>  
+</transactions>
+
+<!--  6. test order: buy stock -->
+<!-- account 1 yes:10  balance:0.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
+
+<!-- sell order-->
+<!-- account 1 yes:0  balance:0.5 -->
+<!-- trans 2 amount:-10 limit:10 open-->
+<!-- trans 4 amount:50 limit:8 open-->
+<!-- trans 5 amount:-10 limit:10 open-->
+<!-- trans 3 amount:30 limit:20 executed:10-->
+<!-- account 2 yes:70 limit:2 balance:750.5-->
